@@ -1,7 +1,15 @@
 import React from 'react'
+import CssBaseline from '@mui/material/CssBaseline';
+import { AuthProvider } from './contexts/AuthContext';
+import Mainrouter from './components/MainRouter';
 
 export default function App() {
   return (
-    <div>App</div>
+    <>
+      <CssBaseline />
+      <AuthProvider>
+        <Mainrouter/>
+      </AuthProvider>
+    </>
   )
 }
