@@ -47,11 +47,12 @@ export const AuthProvider = ({ children }) => {
         sessionStorage.setItem("user", JSON.stringify(user));
         setCurrentUser(user);
         setToken(token);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
-    setLoading(false);
   };
 
   const usersInDatabase = ({uid, email, displayName, stsTokenManager, reloadUserInfo}) => {
@@ -72,11 +73,11 @@ export const AuthProvider = ({ children }) => {
     token,
     signInWithGooglePopup,
     logout,
-    loading,
+    loadingAuth: loading,
   };
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };

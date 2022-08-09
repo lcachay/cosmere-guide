@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useBooks } from '../contexts/BooksContext';
 import BooksCards from './BooksCards';
 import BooksNavbar from './BooksNavbar';
 import Footer from './Footer';
@@ -8,10 +9,14 @@ import Layout from './Layout';
 import Login from './Login';
 import NotFound from './NotFound';
 import PrivateRoute from './PrivateRoute';
+import SkeletonCards from './SkeletonCards';
+import SkeletonNavbar from './SkeletonNavbar';
 
 
 const MainRouter = () => {
-  const {currentUser} = useAuth()
+  const {currentUser} = useAuth();
+  const {loadingBooks} = useBooks();
+
   return (
     <BrowserRouter>
       <Routes>
@@ -19,8 +24,8 @@ const MainRouter = () => {
           <Route index element={<Login />} />
         </Route>
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Layout sidebarRight={<BooksNavbar/>} footer={<Footer/>}/>}>
-            <Route index element={<BooksCards />} />
+          <Route path="/" element={<Layout sidebarRight={loadingBooks ? <SkeletonNavbar/> : <BooksNavbar/>} footer={<Footer/>}/>}>
+            <Route index element={loadingBooks ? <SkeletonCards /> : <BooksCards/>} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

@@ -50,6 +50,28 @@
   color: #0F172A;
 }
 
+
+
+.book-title {
+  margin: 0;
+  font-size: 3rem;
+  line-height: 1.2;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  letter-spacing: .1rem;
+}
+
+.book-subtitle {
+  font-family: 'Courier New', Courier, monospace;
+  opacity: .8;
+}
+
+/* md material-ui */
+@media (max-width:899px){
+  html{
+    font-size: .9rem;
+  }
+}
+
 /* sm material-ui */
 @media (max-width:599px){ 
   html{
