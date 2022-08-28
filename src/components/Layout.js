@@ -13,14 +13,14 @@ const Layout = ({header, sidebarLeft, sidebarRight, footer}) => {
 
   return (
     <Grid container direction="column" className="bg-slate-800">
-      <Grid item>
-        {header}
-      </Grid>
       <Grid item container justifyContent="space-between" wrap='nowrap'>
         <Grid item>
           {sidebarLeft}
         </Grid>
         <Grid item className={`${md && "overflow-y-auto h-screen"}`}>
+          <Grid item>
+            {header}
+          </Grid>
           <Outlet/>
           <Grid item justifySelf="flex-end">
             {footer}

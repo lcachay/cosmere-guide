@@ -11,6 +11,7 @@ import NotFound from './NotFound';
 import PrivateRoute from './PrivateRoute';
 import SkeletonCards from './SkeletonCards';
 import SkeletonNavbar from './SkeletonNavbar';
+import ProgressBar from './ProgressBar';
 
 
 const MainRouter = () => {
@@ -24,7 +25,7 @@ const MainRouter = () => {
           <Route index element={<Login />} />
         </Route>
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Layout sidebarRight={loadingBooks ? <SkeletonNavbar/> : <BooksNavbar/>} footer={<Footer/>}/>}>
+          <Route path="/" element={<Layout header={<ProgressBar />} sidebarRight={loadingBooks ? <SkeletonNavbar/> : <BooksNavbar/>} footer={<Footer/>}/>}>
             <Route index element={loadingBooks ? <SkeletonCards /> : <BooksCards/>} />
           </Route>
         </Route>

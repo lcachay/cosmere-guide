@@ -13,7 +13,7 @@ const BooksCards = () => {
     <Grid container sx={{padding: '4em 2em'}} gap={md ? 6 : 4} justifyContent='center' alignItems='center'>
     {
       books.map((book, index) => (
-      <Card sx={{ width: '20em', height: '27em', backgroundColor:'transparent' }} classes={{root: `flex flex-col justify-between bg-slate-700`}} key={index}>
+      <Card id={`card-${index}`} sx={{ width: '20em', height: '27em', backgroundColor:'transparent' }} classes={{root: `flex flex-col justify-between bg-slate-700`}} key={index}>
         <CardHeader classes={{root: `bg-slate-700`}}></CardHeader>
         <CardActionArea classes={{root: `h-full overflow-auto`}}>
           <CardContent className="text-slate-50" classes={{root: `bg-slate-700 flex flex-col justify-between h-full`}}>
