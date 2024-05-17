@@ -9,10 +9,6 @@ export const useLoading = () => {
 export const LoadingProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    console.log(loading)
-  }, [loading]);
-
   const value = {
     loading,
     setLoading,

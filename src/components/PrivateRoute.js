@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
 import { useBooks } from '../contexts/BooksContext';
 import { useLoading } from '../contexts/LoadingContext';
+import { useUser } from '../contexts/UserContext';
 
 const PrivateRoute = (props) => {
-  const {currentUser} = useAuth()
+  const {currentUser} = useUser()
   const {getBooks} = useBooks();
   const {loading} = useLoading();
   if (!currentUser) {

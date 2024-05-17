@@ -1,7 +1,8 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import { ref, update } from "firebase/database";
-import React, { useContext, useState, createContext } from "react";
+import React, { useContext, useState, createContext, useEffect } from "react";
 import { provider, auth, signInWithPopup, database, signOut } from "../firebase";
+import { useUser } from "./UserContext";
 
 const AuthContext = createContext();
 
@@ -11,11 +12,13 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(
-    auth.currentUser || JSON.parse(sessionStorage.getItem("user"))
-  );
+  const {currentUser, setCurrentUser} = useUser();
   const [token, setToken] = useState();
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setCurrentUser(auth.currentUser || JSON.parse(sessionStorage.getItem("user")))
+  }, [])
 
   const logout = () => {
     signOut(auth)
@@ -36,40 +39,36 @@ export const AuthProvider = ({ children }) => {
   const signInWithGooglePopup = async () => {
     setLoading(true);
 
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
+    try{
+      const result = await signInWithPopup(auth, provider)
 
-        usersInDatabase(user);
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+      await usersInDatabase(user);
 
-        sessionStorage.setItem("user", JSON.stringify(user));
-        setCurrentUser(user);
-        setToken(token);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+      sessionStorage.setItem("user", JSON.stringify(user));
+      setCurrentUser(user);
+      setToken(token);
+      setLoading(false);
+        
+
+    } catch(error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
 
-  const usersInDatabase = ({uid, email, displayName, stsTokenManager, reloadUserInfo}) => {
- 
-    update(ref(database, 'users/'), {[uid]: {email, displayName, stsTokenManager, createdAt: reloadUserInfo.createdAt, lastLoginAt: reloadUserInfo.lastLoginAt}})
-    .then(() => {
-      console.log("Users updated")
-    })
-    .catch((error) => {
+  const usersInDatabase = async ({uid, email, displayName, stsTokenManager, reloadUserInfo}) => {
+    try{
+      await update(ref(database, 'users/'), {[uid]: {email, displayName, stsTokenManager, createdAt: reloadUserInfo.createdAt, lastLoginAt: reloadUserInfo.lastLoginAt}})
+    } catch(error) {
       console.log(error)
-    });
-
+    }
   }
 
 
   const value = {
-    currentUser,
     token,
     signInWithGooglePopup,
     logout,
