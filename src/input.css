@@ -9,7 +9,7 @@
   @apply bg-slate-600 text-slate-50 rounded  hover:bg-slate-500;
 }
 .btn-text{
-  @apply bg-transparent hover:bg-slate-600 text-slate-700 hover:text-slate-50 rounded;
+  @apply bg-transparent hover:bg-slate-600 text-slate-50 rounded;
 }
 .btn-outlined{
   @apply bg-transparent hover:bg-slate-600 text-slate-600 hover:text-slate-50 outline outline-2 outline-slate-600 rounded;

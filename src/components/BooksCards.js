@@ -28,7 +28,7 @@ const BooksCards = () => {
       <Modal 
         open={openDetailsModal} 
         close={() => {setSelectedBook(false); setOpenDetailsModal(false)}}
-        title='title' 
+        title={selectedBook?.Title} 
       >
         <BookDetails book={selectedBook}/>
       </Modal>
