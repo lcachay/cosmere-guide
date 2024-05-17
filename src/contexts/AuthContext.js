@@ -12,7 +12,7 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const {currentUser, setCurrentUser} = useUser();
+  const {setCurrentUser} = useUser();
   const [token, setToken] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -45,6 +45,7 @@ export const AuthProvider = ({ children }) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
+      console.log(user);
       await usersInDatabase(user);
 
       sessionStorage.setItem("user", JSON.stringify(user));
@@ -61,7 +62,7 @@ export const AuthProvider = ({ children }) => {
 
   const usersInDatabase = async ({uid, email, displayName, stsTokenManager, reloadUserInfo}) => {
     try{
-      await update(ref(database, 'users/'), {[uid]: {email, displayName, stsTokenManager, createdAt: reloadUserInfo.createdAt, lastLoginAt: reloadUserInfo.lastLoginAt}})
+      await update(ref(database, `users/${uid}`), {auth: {email, displayName, stsTokenManager, createdAt: reloadUserInfo.createdAt, lastLoginAt: reloadUserInfo.lastLoginAt}})
     } catch(error) {
       console.log(error)
     }
