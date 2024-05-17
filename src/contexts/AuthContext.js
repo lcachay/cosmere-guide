@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
-      console.log(user);
       await usersInDatabase(user);
 
       sessionStorage.setItem("user", JSON.stringify(user));
