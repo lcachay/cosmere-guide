@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
 import { useBooks } from '../contexts/BooksContext';
 import BooksCards from './BooksCards';
 import BooksNavbar from './BooksNavbar';
@@ -12,10 +11,11 @@ import PrivateRoute from './PrivateRoute';
 import SkeletonCards from './SkeletonCards';
 import SkeletonNavbar from './SkeletonNavbar';
 import ProgressBar from './ProgressBar';
+import { useUser } from '../contexts/UserContext';
 
 
 const MainRouter = () => {
-  const {currentUser} = useAuth();
+  const {currentUser} = useUser();
   const {loadingBooks} = useBooks();
 
   return (
