@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+  @apply cursor-pointer transition-colors bg-transparent duration-200 text-slate-50 hover:bg-slate-700 uppercase tracking-wide p-3;
+}
+.btn-filled {
+  @apply bg-slate-600 text-slate-50 rounded  hover:bg-slate-500;
+}
+.btn-text{
+  @apply bg-transparent hover:bg-slate-600 text-slate-700 hover:text-slate-50 rounded;
+}
+.btn-outlined{
+  @apply bg-transparent hover:bg-slate-600 text-slate-600 hover:text-slate-50 outline outline-2 outline-slate-600 rounded;
+}
+.btn-primary {
+  @apply bg-slate-400 font-bold text-slate-800 rounded hover:scale-105 hover:bg-slate-400;
+}
+/* #94A3B8 */
+.btn-pill{
+  @apply rounded-full;
+}
