@@ -1,6 +1,8 @@
-import { ButtonGroup, Grid } from '@mui/material';
+import { Grid, Link, Tooltip } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import PublicIcon from '@mui/icons-material/Public';
+import BookIcon from '@mui/icons-material/Book';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { useUser } from '../contexts/UserContext';
 
 const BookStatus = {
@@ -9,46 +11,62 @@ const BookStatus = {
   Unread: 'Unread',
 }
 
-const BookDetails = ({book}) => {
+const BookDetails = ({ book }) => {
   const { booksInProgress, booksCompleted, markAsRead, markAsReading, markAsUnread } = useUser(useUser);
   const [status, setStatus] = useState('');
 
   useEffect(() => {
-    if (booksCompleted.find(title => title === book.Title)){
+    if (booksCompleted.find(title => title === book.Title)) {
       setStatus(BookStatus.Completed);
-    } else if(booksInProgress.find(title => title === book.Title)){
+    } else if (booksInProgress.find(title => title === book.Title)) {
       setStatus(BookStatus.Reading);
     } else {
       setStatus(BookStatus.Unread);
     }
   }, [])
-  
 
+  // TODO: finish styling details
+  // TODO: add link to brandon's page and book cover to the DB
   return (
-    <Grid container>
+    <Grid container flexDirection='column' justifyContent='space-between' style={{ height: '75vh', maxHeight: '478px' }} className='w-72' >
       <Grid item>
-        <p>Released on: {book.Year}-{book.Month}-{book.Day}</p>
-        <p>{book.Saga}</p>
-        <p><PublicIcon/> {book.Planet} ({book.System})</p>
-      </Grid>
-      <Grid item>
+        <Grid container justifyContent='space-between' alignItems='baseline'>
+          <div>
+            <p className='flex place-items-center gap-1'>
+              <Tooltip disableInteractive title='Saga' arrow placement='top'>
+                <BookIcon /> 
+              </Tooltip>
+              {book.Saga}</p>
+            <p className='flex place-items-center gap-1'>
+              <Tooltip disableInteractive title='Planet and solar system' arrow placement='top'>
+                <PublicIcon /> 
+              </Tooltip>
+              {book.Planet} ({book.System})</p>
+          </div>
+          <p className='text-right italic flex place-items-center gap-1'>
+            <Tooltip disableInteractive title='Date of release' arrow placement='top'>
+              <CalendarTodayIcon /> 
+            </Tooltip>
+            {book.Year}-{book.Month}-{book.Day}</p>
+        </Grid>
         <p>{book.Notes}</p>
-        <p>Want to know more? <a href={book.Link || '#'}>Check Brandon's official page!</a></p>
+        <p>Want to know more? <Link target="_blank" rel="noreferrer" underline="hover" href={book.Link || '#'} className='link'>Check Brandon's official page!</Link></p>
       </Grid>
       <Grid item>
-        <p>{status}. Change status?</p>
-        <div className='inline-flex'>
+        <p className='w-full bg-slate-800 text-center cursor-default p-2'>Status: {status}</p>
+        <div className='w-full bg-slate-600 text-center outline outline-2 outline-slate-600'>Change status?</div>
+        <div className='grid grid-cols-2'>
           {
             status !== BookStatus.Unread &&
-            <button onClick={() => markAsUnread(book.Title)} className='btn btn-text'>Mark as unread</button>
+            <button onClick={() => markAsUnread(book.Title)} className='btn btn-outlined text-xs'>Mark as unread</button>
           }
           {
             status !== BookStatus.Reading &&
-            <button onClick={() => markAsReading(book.Title)} className='btn btn-text'>In progress...</button>
+            <button onClick={() => markAsReading(book.Title)} className='btn btn-outlined text-xs'>In progress...</button>
           }
           {
             status !== BookStatus.Completed &&
-            <button onClick={() => markAsRead(book.Title)} className='btn btn-text'>Complete!</button>
+            <button onClick={() => markAsRead(book.Title)} className='btn btn-outlined text-xs'>Complete!</button>
           }
         </div>
       </Grid>
