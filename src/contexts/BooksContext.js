@@ -4,7 +4,7 @@ import { database } from "../firebase";
 
 const BooksContext = createContext();
 
-// TODO: sorting
+// TODO: sorting - after first release
 // get access to the context
 export const useBooks = () => {
   return useContext(BooksContext);

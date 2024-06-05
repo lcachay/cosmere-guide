@@ -25,8 +25,6 @@ const BookDetails = ({ book }) => {
     }
   }, [])
 
-  // TODO: finish styling details
-  // TODO: add link to brandon's page and book cover to the DB
   return (
     <Grid container flexDirection='column' justifyContent='space-between' style={{ height: '75vh', maxHeight: '478px' }} className='w-72' >
       <Grid item>
