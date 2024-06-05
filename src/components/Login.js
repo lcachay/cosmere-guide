@@ -11,11 +11,11 @@ const Login = () => {
       <Avatar className='size-40 bg-slate-600' alt="Illustration of Brandon Sanderson with his secret project's manuscripts" src="../assets/brandonillustration">
         <MenuBookIcon className='text-8xl text-orange-400' alt='Illustration of a book'/>
       </Avatar>
-      <h1 className='p-0 m-0 text-5xl'>Cosmere Guide</h1>
+      <h1 className='p-0 m-0'>Cosmere Guide</h1>
       <p className='p-0 m-0'>Welcome to your ultimate companion in navigating the intricate worlds inside the Cosmere!</p>
       <div>
         <GoogleButton onClick={signInWithGooglePopup}/>
-        <p className='italic text-sm mt-4'>Other login methods coming soon!</p>
+        <p className='italic text-sm mt-4'>*Other login methods coming soon!</p>
       </div>
     </Grid>
   );

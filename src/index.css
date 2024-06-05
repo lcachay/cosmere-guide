@@ -23,6 +23,16 @@ body{
   min-height: 100dvh;
 }
 
+h1{
+  font-size: 3rem;
+  font-weight: 900;
+}
+
+h2{
+  font-size: 2.25rem;
+  font-weight: 600;
+}
+
 .book-tab{
   position: relative;
   z-index: 1;
