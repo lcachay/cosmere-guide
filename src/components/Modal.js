@@ -3,10 +3,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import React from 'react'
 
 /**
- * @param {{ open: boolean; close: func; title?: string; actions?: object; persistent?: boolean; children: any; }}
+ * @param {{ open: boolean; close: func; title?: string; actions?: object; persistent?: boolean; children: any; paperStyles?: string }}
  * @param {object} [actions] - {left: [{name: string, onClick: func, primary: boolean}], center: [...], right: [...] }
  */
-const Modal = ({ open, close, title, actions, persistent = false, children }) => {
+const Modal = ({ open, close, title, actions, persistent = false, children, paperStyles }) => {
 
   const handleClose = (event, reason) => {
     if (persistent && reason === "backdropClick") {
@@ -57,7 +57,7 @@ const Modal = ({ open, close, title, actions, persistent = false, children }) =>
           open={open}
           onClose={handleClose}
           disableEscapeKeyDown={persistent}
-          PaperProps={{className: 'bg-slate-700 text-slate-50'}}
+          PaperProps={{className: 'bg-slate-700 text-slate-50', style: paperStyles}}
         >
           <IconButton className='absolute right-0 text-slate-50 opacity-50' onClick={close}><CloseIcon/></IconButton>
           {

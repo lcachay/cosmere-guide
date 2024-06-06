@@ -29,6 +29,7 @@ const BooksCards = () => {
         open={openDetailsModal} 
         close={() => {setSelectedBook(false); setOpenDetailsModal(false)}}
         title={selectedBook?.Title} 
+        paperStyles={{aspectRatio: '4 / 7', maxHeight: '75%'}}
       >
         <BookDetails book={selectedBook}/>
       </Modal>
