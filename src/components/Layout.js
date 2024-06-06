@@ -10,7 +10,7 @@ const Layout = ({ header, sidebarLeft, sidebarRight, footer }) => {
   const { loadingAuth } = useAuth();
 
   return (
-    <Grid container justifyContent='center' className="min-h-dvh">
+    <Grid container justifyContent='center' flexWrap='nowrap' className="min-h-dvh">
       {
         sidebarLeft &&
         <Grid item justifySelf='left'>
@@ -18,7 +18,7 @@ const Layout = ({ header, sidebarLeft, sidebarRight, footer }) => {
         </Grid>
       }
       <Grid container item flexDirection='column' justifyContent='center' alignItems='center' className={`${md && "overflow-y-auto h-screen flex-nowrap"}`}>
-        <Grid item>
+        <Grid item className={`w-full ${!md ? "fixed" : "overflow-y-auto h-screen overflow-x-hidden"}`} sx={{ top: 0 }}>
           {header}
         </Grid>
         <Outlet style={{ width: "100%" }} />

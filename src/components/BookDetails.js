@@ -26,7 +26,7 @@ const BookDetails = ({ book }) => {
   }, [])
 
   return (
-    <Grid container flexDirection='column' justifyContent='space-between' style={{ height: '75vh', maxHeight: '478px' }} className='w-72' >
+    <Grid container flexDirection='column' justifyContent='space-between' className='h-full' flexWrap='nowrap' >
       <Grid item>
         <Grid container justifyContent='space-between' alignItems='baseline'>
           <div>

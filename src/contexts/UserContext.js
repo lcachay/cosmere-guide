@@ -78,7 +78,7 @@ export const UserProvider = ({ children }) => {
       console.log(error);
       setLoading(false);
     };
-    setProgress(prev => ++prev)
+    setProgress(((booksCompleted.length + 1) * 100) / booksTotal)
   }
 
   const markAsUnread = async (bookTitle) => {
@@ -93,7 +93,7 @@ export const UserProvider = ({ children }) => {
       console.log(error);
       setLoading(false);
     };
-    setProgress(prev => prev--)
+    setProgress(((booksCompleted.length - 1) * 100) / booksTotal)
   }
 
   const value = {
