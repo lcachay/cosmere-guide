@@ -19,7 +19,7 @@ const BooksCards = () => {
   }, [selectedBook])
   
   return ((
-    <Grid container sx={{padding: '4em 2em'}} gap={md ? 6 : 4} justifyContent='center' alignItems='center'>
+    <Grid container className='grow overflow-scroll' sx={{padding: '4em 2em'}} gap={md ? 6 : 4} justifyContent='center' alignItems='center'>
       {
         books.map((book, index) => (
         <BooksCard setSelectedBook={setSelectedBook} key={index} book={book} index={index}/>
