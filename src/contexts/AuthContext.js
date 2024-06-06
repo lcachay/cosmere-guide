@@ -17,13 +17,13 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setCurrentUser(auth.currentUser || JSON.parse(sessionStorage.getItem("user")))
+    setCurrentUser(auth.currentUser || JSON.parse(localStorage.getItem("user")))
   }, [])
 
   const logout = () => {
     signOut(auth)
       .then(() => {
-        sessionStorage.removeItem("user");
+        localStorage.removeItem("user");
         setCurrentUser();
         setToken();
         return true;
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
       const user = result.user;
       await usersInDatabase(user);
 
-      sessionStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
       setCurrentUser(user);
       setToken(token);
       setLoading(false);
